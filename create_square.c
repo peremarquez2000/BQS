@@ -1,9 +1,10 @@
 #include <unistd.h>
 
-void ft_create_square(char **mat, int dimension, char printable_char, char empty_char, char obstacle_char)
+void ft_create_square(char **mat, int dimension, char printing_char)
 {
 	int checker;
 	int i;
+	int j;
 
 	checker = 0;
 	i = 0;
@@ -12,7 +13,8 @@ void ft_create_square(char **mat, int dimension, char printable_char, char empty
 		j = 0;
 		while (j < dimension)
 		{
-			mat[i][j] = printable_char;
+			mat[i][j] = printing_char;
+			j++;
 		}
 		i++;
 	}
