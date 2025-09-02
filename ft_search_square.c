@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_search_square.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fliraud- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/03 00:52:11 by fliraud-          #+#    #+#             */
+/*   Updated: 2025/09/03 00:52:18 by fliraud-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 int check_square(char **mat, int i, int j, int dimension, char empty_char);
 void ft_create_square(char **mat, int i, int j, int dimension, char printing_char);
