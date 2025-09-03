@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-
-int check_square(char **mat, int i, int j, int dimension, char empty_char)
+#include <stdio.h>
+int ft_check_square(char **mat, int i, int j, int dimension, char empty_char)
 {
     int checker;
     int z;
@@ -23,12 +23,14 @@ int check_square(char **mat, int i, int j, int dimension, char empty_char)
         z = j;
         while (z < dimension)
         {
-            if (mat[i][j] == empty_char)
+            if (mat[i][z] == empty_char)
                 checker++;
             else
                 return (0);
+            //printf("\nz=%d\n", z);
             z++;
         }
+        //printf("\nchecker=%d\n", checker);
         i++;
     }
     if (checker == dimension * dimension)

@@ -100,9 +100,10 @@ int	main(int argc, char **argv)
 	printf("\n----------------------\nOPERACIONES DEL JUEGO\n-----------------------\n");
 
 	ft_print_matrix(matrix, dim, nCol);
-	printf("%d", ft_check_square(matrix, 0, 0, 5, '.'));
-	//ft_search_square(matrix, dim, nCol, 1, emp, full);
-	//ft_print_matrix(matrix, nCol,dim);
+	//printf("%d", ft_check_square(matrix, 0, 0, 4, '.'));
+	//printf("es bien?:%d", matrix[1][4] == '.');
+	ft_search_square(matrix, dim, nCol, 5, emp, full);
+	ft_print_matrix(matrix, dim, nCol);
 	//ft_search_square(char **mat, int n_lines, int length_line, int dimension, char empty_char, char printing_char)
 	//check_square(char **mat, int i, int j, int dimension, char empty_char);
 	/////////////////////////////////////////////////////////////////////////////////////

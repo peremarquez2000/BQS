@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-int check_square(char **mat, int i, int j, int dimension, char empty_char);
+#include <stdio.h>
+int ft_check_square(char **mat, int i, int j, int dimension, char empty_char);
 void ft_create_square(char **mat, int i, int j, int dimension, char printing_char);
 
 void ft_min(int *aux, int i)
@@ -25,8 +26,8 @@ void ft_max(int *aux, int i)
 	if (*aux < i)
 		*aux = i;
 }
-
-void ft_search_square(char **mat, int dimension, char empty_char, char printing_char)
+//ft_search_square(char **mat, int n_lines, int length_line, int dimension, char empty_char, char printing_char)
+void ft_search_square(char **mat, int n_lines, int nCols, int dimension, char empty_char, char printing_char)
 {
 	int i;
 	int j;
@@ -34,19 +35,27 @@ void ft_search_square(char **mat, int dimension, char empty_char, char printing_
 	int aux_j;
 	int aux_dimension;
 
+	printf("dimension=%d",dimension);
+
 	aux_i = 99;
 	aux_j = 99;
+	i = 0;
+	aux_dimension = 0;
 	while (i < n_lines)
 	{
 		j = 0;
-		while (j < length_line)
+		while (j < nCols)
 		{
-			if (check_square(mat, i, j, dimension, empty_char) == 1)
+			printf("\ni =%d j= %d", i, j);
+
+			if (ft_check_square(mat, i, j, dimension, empty_char) == 1)
 			{
 				ft_min(&aux_i, i);
 				ft_min(&aux_j, j);
 				ft_max(&aux_dimension, dimension);
-				ft_search_square(mat, dimension + 1, empty_char, printing_char);
+				//printf("\n i = %d, j = %d, dimension =%d\n", i, j, dimension);
+				//printf("\n aux_i = %d, aux_j = %d, aux_dimension =%d\n", aux_i, aux_j, aux_dimension);
+				ft_search_square(mat, n_lines, nCols, dimension + 1, empty_char, printing_char);
 				return;
 			}
 			j++;
