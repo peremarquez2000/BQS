@@ -10,20 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "bsq.h"
 
 void ft_create_square(char **mat, int i, int j, int dimension, char printing_char)
 {
 	int z;
+	int	l;
 
-	while (i < dimension)
+	l = i;
+
+	while (l < dimension + i)
 	{
 		z = j;
-		while (z < dimension)
+		while (z < dimension + j)
 		{
-			mat[i][j] = printing_char;
+			mat[l][z] = printing_char;
 			z++;
 		}
-		i++;
+		l++;
 	}
 }

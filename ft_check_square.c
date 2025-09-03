@@ -10,28 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "bsq.h"
+
 int ft_check_square(char **mat, int i, int j, int dimension, char empty_char)
 {
     int checker;
     int z;
-
+    int l;
     checker = 0;
-    while (i < dimension)
+    l = i;
+    while (l < dimension + i)
     {
         z = j;
-        while (z < dimension)
+        while (z < dimension + j)
         {
-            if (mat[i][z] == empty_char)
+            //printf("z%d", z);
+            if (mat[l][z] == empty_char)
                 checker++;
             else
                 return (0);
-            //printf("\nz=%d\n", z);
             z++;
         }
         //printf("\nchecker=%d\n", checker);
-        i++;
+        l++;
     }
     if (checker == dimension * dimension)
         return (1);

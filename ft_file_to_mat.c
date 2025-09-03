@@ -6,13 +6,11 @@
 /*   By: fliraud- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 00:53:52 by fliraud-          #+#    #+#             */
-/*   Updated: 2025/09/03 03:59:44 by fliraud-         ###   ########.fr       */
+/*   Updated: 2025/09/03 17:22:14 by fliraud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "bsq.h"
 
 char	**file_to_mat(char *file_str,char *obs, char *emp, char *full, int *dim, int *nCol)
 {
@@ -41,6 +39,8 @@ char	**file_to_mat(char *file_str,char *obs, char *emp, char *full, int *dim, in
 		return (NULL);
 	}
 	//Abrimos fichero si no existe NULL, leemos
+	if (!(buffer[i] >= '1' && buffer[i] <= '9'))
+		return (NULL);
 	while (buffer[i] >= '0' && buffer[i] <= '9')
 	{
 		dim2 = dim2 * 10 + (buffer[i] - '0');
@@ -50,8 +50,12 @@ char	**file_to_mat(char *file_str,char *obs, char *emp, char *full, int *dim, in
 	*emp = buffer[i++];
 	*obs = buffer[i++];
 	*full = buffer[i++];
+	if (*emp < 32 || *emp > 126 || *obs < 32 || *obs > 126 || *full < 32 || *full > 126)
+		return (NULL);
 	if (buffer[i] == '\n')
 		i++;
+	else
+		return (NULL);
 	// Conseguimos Dim, Empty, Obstacle, Full chars 
 	k = i;
 	while (k < bytes_read && buffer[k] != '\n')
@@ -59,6 +63,8 @@ char	**file_to_mat(char *file_str,char *obs, char *emp, char *full, int *dim, in
 		nCol2++;
 		k++;
 	}
+	if (nCol2 < 1)
+		return (NULL);
 	*nCol = nCol2;
 	matrix = (char **)malloc(*dim * sizeof(char *));
 	if (!matrix)
