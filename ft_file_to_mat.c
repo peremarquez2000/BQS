@@ -50,6 +50,8 @@ char	**file_to_mat(char *file_str,char *obs, char *emp, char *full, int *dim, in
 	*emp = buffer[i++];
 	*obs = buffer[i++];
 	*full = buffer[i++];
+	if (*emp == *obs || *emp == *full || *obs == *full)
+    		return (NULL);
 	if (*emp < 32 || *emp > 126 || *obs < 32 || *obs > 126 || *full < 32 || *full > 126)
 		return (NULL);
 	if (buffer[i] == '\n')
@@ -91,19 +93,24 @@ char	**file_to_mat(char *file_str,char *obs, char *emp, char *full, int *dim, in
 	while (j < *dim && k < bytes_read)
 	{
 		i = 0;
-		while (k < bytes_read && buffer[k] == '\n')
-		        k++;
+		if (k < bytes_read && buffer[k] == '\n')
+		        return (NULL);
 	    	while (i < nCol2 && k < bytes_read && buffer[k] != '\n')
 	    	{
+	    		if (buffer[k] != *emp && buffer[k] != *obs)
+        			return (NULL);
 	        	matrix[j][i] = buffer[k];
 	        	i++;
 	        	k++;
 	    	}
-	    	while (k < bytes_read && buffer[k] != '\n')
-       		 	k++;    
+	    	if (i != nCol2)
+	    		return (NULL);
+	    	if (k < bytes_read && buffer[k] != '\n')
+       		 	return (NULL);    
 	    	if (k < bytes_read && buffer[k] == '\n')
 	        	k++;
-    
+	        else
+	        	return (NULL);
 	    	j++;
 	}
 	close(file);
